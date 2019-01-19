@@ -32,7 +32,7 @@ RSpec.describe 'Authenticate User API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Invalid Credentials/)
+          .to match(/Invalid Credentials/)
       end
     end
   end

@@ -25,7 +25,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Missing token/)
+        expect(response.body).to match(/Missing token/)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Invalid token/)
+        expect(response.body).to match(/Invalid token/)
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Missing token/)
+        expect(response.body).to match(/Missing token/)
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Invalid token/)
+        expect(response.body).to match(/Invalid token/)
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Missing token/)
+        expect(response.body).to match(/Missing token/)
       end
     end
 
@@ -131,7 +131,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Invalid token/)
+        expect(response.body).to match(/Invalid token/)
       end
     end
 
@@ -186,7 +186,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Missing token/)
+        expect(response.body).to match(/Missing token/)
       end
     end
 
@@ -197,7 +197,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Invalid token/)
+        expect(response.body).to match(/Invalid token/)
       end
     end
 
@@ -251,7 +251,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Missing token/)
+        expect(response.body).to match(/Missing token/)
       end
     end
 
@@ -262,7 +262,7 @@ RSpec.describe 'Products API', type: :request do
       end
 
       it 'returns a not authorized message' do
-        expect(response.body).to match(/Validation failed: Invalid token/)
+        expect(response.body).to match(/Invalid token/)
       end
     end
 

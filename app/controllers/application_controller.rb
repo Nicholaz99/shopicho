@@ -8,7 +8,13 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
+    command = AuthorizeApiRequest.call(request.headers)
+    @current_user = command.result
+    json_response({ message: 'Not Authorized', error: command.errors }, :unauthorized) unless @current_user
+  end
+
+  def authenticate_admin
     @current_user = AuthorizeApiRequest.call(request.headers).result
-    render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+    json_response({ message: 'Only admin is authorized' }, :unauthorized) unless @current_user.admin?
   end
 end

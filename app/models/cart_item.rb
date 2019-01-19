@@ -4,5 +4,5 @@ class CartItem < ApplicationRecord
   belongs_to :product
 
   # validations
-  validates_presence_of :quantity, :price
+  validates_presence_of :product_id, :quantity
 end

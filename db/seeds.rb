@@ -5,3 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# clean current data
+CartItem.destroy_all
+Cart.destroy_all
+User.destroy_all
+Product.destroy_all
+
+# create admin user
+User.create!({ name: 'admin', email: 'admin@shopify.com', balance: '99999' password: 'admin', password_confirmation: 'admin', admin: true })
+
+# populate products
+Product.create!([{
+  title: 'Fried Chicken',
+  price: '132.14',
+  inventory_count: 3
+},
+{
+  title: 'Baked Chicken',
+  price: '232.14',
+  inventory_count: 2
+},
+{
+  title: 'Steam Chicken',
+  price: '32.14',
+  inventory_count: 10
+}])

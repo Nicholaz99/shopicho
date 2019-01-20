@@ -14,8 +14,8 @@ Shopicho
 - [Requirements](#requirements)
 - [Run Shopicho](#run-shopicho)
 - [Details of Shopicho](#details-of-shopicho)
-- [Authors](#authors)
-- [Words From Authors](#words-from-authors)
+- [Author](#author)
+- [Words From Author](#words-from-author)
 - [List of Endpoints](#list-of-endpoints)
 
 ## Introduction
@@ -33,7 +33,7 @@ A few of notable things you can do with Shopicho API:
 These are the list of prerequisites those I used:
 * Ruby 2.5.3
 * Rails 5.2.2
-* Bundler2.0.1
+* Bundler 2.0.1
 
 ## Run Shopicho
 Follow these steps to run Shopicho on your local:
@@ -140,10 +140,10 @@ Every model controllers jobs are to make sure that users could not violate const
 ### Unit Testing
 In order to run the unit testing, execute `bundle exec rspec` in your shell. I create 159 examples to make sure that my endpoints were working well. You can check all the unit testing in `spec` folder. I've tried to make it as humanly as possible so that everyone could understand all test cases with their intended behaviors.
 
-## Authors
+## Author
 Nicholas Rianto Putra - nicholasrputra@gmail.com - https://github.com/nicholaz99
 
-## Words from Authors
+## Words from Author
 Thanks to Shopify Careers for your amazing [Summer 2019 Developer Intern Challenge](https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/preview). Your challenge gives me the opportunity to improve my software engineering skills. I learn a lot by doing your amazing challenge, just like your Director of Engineering words.
 > *"Shopify gives me the opportunity to continually grow and discover my strengths, technically and people-wise."*
 > *, IBK Ajila — Director of Engineering Shopify*

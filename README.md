@@ -33,7 +33,7 @@ A few of notable things you can do with Shopicho API:
 These are the list of prerequisites those I used:
 * Ruby 2.5.3
 * Rails 5.2.2
-* Bundler2.0.1
+* Bundler 2.0.1
 
 ## Run Shopicho
 Follow these steps to run Shopicho on your local:

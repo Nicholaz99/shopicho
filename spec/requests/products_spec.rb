@@ -166,8 +166,7 @@ RSpec.describe 'Products API', type: :request do
           end
   
           it 'returns a validation failure message' do
-            expect(response.body)
-              .to match(/Validation failed: Price can't be blank/)
+            expect(response.body).to match(/Validation failed: Price can't be blank/)
           end
         end
       end

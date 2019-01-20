@@ -28,6 +28,8 @@ class CartItemsController < ApplicationController
         new_item_total = item.quantity * item.price
         @cart.update_attribute(:total_amount, curr_total - old_item_total + new_item_total)
         json_response({ 'message': 'Cart Item is updated' })
+      else
+        json_response({ 'message': 'The product quantity is not that much' })
       end
     else
       @cart.cart_items.create!(cart_item_params)

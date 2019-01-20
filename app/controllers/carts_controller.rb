@@ -26,7 +26,7 @@ class CartsController < ApplicationController
 
       # process items
       @cart.cart_items.each do |item|
-        product = Product.find(item.product_id).decrement!(:inventory_count)
+        product = Product.find(item.product_id).decrement!(:inventory_count, item.quantity)
       end
 
       # payment

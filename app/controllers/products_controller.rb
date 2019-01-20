@@ -22,13 +22,13 @@ class ProductsController < ApplicationController
   # PUT /products/:id
   def update
     @product.update!(product_params)
-    head :no_content
+    json_response({ 'message': 'Product is updated' })
   end
 
   # DELETE /products/:id
   def destroy
     @product.destroy
-    head :no_content
+    json_response({ 'message': 'Product is deleted' })
   end
 
   private

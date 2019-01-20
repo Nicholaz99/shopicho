@@ -19,7 +19,7 @@ Shopicho
 - [List of Endpoints](#list-of-endpoints)
 
 ## Introduction
-This is the implementation of the barebones of an online marketplace. A server-side web API that can help you build your own online shop. Shopicho was built using **Ruby on Rails** framework.
+This is the implementation of the barebones of an online marketplace. A server-side web API that can help you build your own online shop. Shopicho was built using **Ruby on Rails** framework. Demo: https://shopicho.herokuapp.com
 
 ## Main Features
 A few of notable things you can do with Shopicho API:

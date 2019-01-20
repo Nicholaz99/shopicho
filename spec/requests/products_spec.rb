@@ -215,8 +215,12 @@ RSpec.describe 'Products API', type: :request do
       context ', the user is admin' do
         let(:header) { { 'Authorization' => admin_token } }
         context ', and the item exists' do
-          it 'returns status code 204' do
-            expect(response).to have_http_status(204)
+          it 'returns status code 200' do
+            expect(response).to have_http_status(200)
+          end
+
+          it 'returns successful message' do
+            expect(response.body).to match(/Product is updated/)
           end
     
           it 'updates the item' do
@@ -279,8 +283,12 @@ RSpec.describe 'Products API', type: :request do
 
       context ', the user is admin' do
         let(:header) { { 'Authorization' => admin_token } }
-        it 'returns status code 204' do
-          expect(response).to have_http_status(204)
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'returns successful message' do
+          expect(response.body).to match(/Product is deleted/)
         end
       end
     end

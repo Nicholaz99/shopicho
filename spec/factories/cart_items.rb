@@ -1,7 +1,7 @@
-# FactoryBot.define do
-#   factory :product do
-#     title { Faker::Lorem.word }
-#     price { Faker::Number.decimal(4, 2) }
-#     inventory_count { Faker::Number.number(10) }
-#   end
-# end
+FactoryBot.define do
+  factory :cart_item do
+    product_id { Faker::Number.between(1, 10) }
+    price { Faker::Number.decimal(3, 2) }
+    quantity { Faker::Number.number(1) }
+  end
+end

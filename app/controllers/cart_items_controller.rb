@@ -18,7 +18,7 @@ class CartItemsController < ApplicationController
   # POST /carts/:cart_id/cart_items
   def create
     item = CartItem.find_by(cart_id: params[:cart_id], product_id: params[:product_id])
-    # if such item exists on your cart
+    # if such item has already existed on your cart
     if item
       product = Product.find(params[:product_id])
       if item.quantity + params[:quantity].to_i <= product.inventory_count

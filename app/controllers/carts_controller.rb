@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :update, :destroy]
-  before_action :check_user, only: [:show, :update]
+  before_action :authenticate_user, only: [:show, :update]
   before_action :is_checkout, only: [:update]
 
   # GET /carts
@@ -45,12 +45,12 @@ class CartsController < ApplicationController
 
   private
 
-  def check_user
-    json_response({ 'message': 'Not Authorized' }, :unauthorized) unless @current_user.id == @cart.user_id
+  def authenticate_user
+    json_response({ 'message': 'Not Authorized' }, :unauthorized) unless @current_user.id == @cart.user_id || @current_user.admin
   end
 
   def set_cart
-    @cart = Cart.find_by(id: params[:id], user_id: @current_user.id)
+    @cart = Cart.find(params[:id])
   end
 
   def is_checkout

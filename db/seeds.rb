@@ -13,7 +13,8 @@ User.destroy_all
 Product.destroy_all
 
 # create admin user
-User.create!({ name: 'admin', email: 'admin@shopify.com', balance: '99999' password: 'admin', password_confirmation: 'admin', admin: true })
+User.create!({ name: 'admin', email: 'admin@shopify.com', balance: '99999', password: 'admin99', password_confirmation: 'admin99', admin: true })
+Cart.create!({ user_id: 1 })
 
 # populate products
 Product.create!([{

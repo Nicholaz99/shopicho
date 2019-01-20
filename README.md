@@ -139,7 +139,7 @@ I include price column in the CartItem model. My reason why I include it is ther
 Every model controllers jobs are to make sure that users could not violate constraints of every features those are stated at [List of Endpoints](#list-of-endpoints) in order to make sure that Shopicho works properly. Controllers also controls the Shopicho authentication flows by running some checker / middleware on every request that Shopicho received.
 
 ### Unit Testing
-In order to run the unit testing, execute `bundle exec rspec` in your shell. I create 159 examples to make sure that my endpoints were working well. You can check all the unit testing in `spec` folder. I've tried to make it as humanly as possible so that everyone could understand all test cases with their intended behaviors.
+I use the rspec to help me create some unit tests for Shopicho. In order to run the unit testing, execute `bundle exec rspec` in your shell. I create 159 examples to make sure that my endpoints were working well. You can check all the unit testing in `spec` folder. I've tried to make it as humanly as possible so that everyone could understand all test cases with their intended behaviors.
 
 ## Author
 Nicholas Rianto Putra - nicholasrputra@gmail.com - https://github.com/nicholaz99

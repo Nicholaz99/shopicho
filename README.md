@@ -39,10 +39,11 @@ These are the list of prerequisites those I used:
 Follow these steps to run Shopicho on your local:
 1. Make sure you have already fulfilled the requirements.
 2. Install all the dependencies with `bundle install`.
-3. Execute `rails db:migrate` on your shell to migrate the database.
-4. Execute `rails db:seed` on your shell to seed the database.
-5. Execute `rails s` on your shell to run the API server on your local.
-6. Read the endpoint documentation on the [List of Endpoints](#list-of-endpoints) in order to use Shopicho properly.
+3. Execute `EDITOR=vim bin/rails credentials:edit` to generate your rails secret_key_base
+4. Execute `rails db:migrate` on your shell to migrate the database.
+5. Execute `rails db:seed` on your shell to seed the database.
+6. Execute `rails s` on your shell to run the API server on your local.
+7. Read the endpoint documentation on the [List of Endpoints](#list-of-endpoints) in order to use Shopicho properly.
 
 ## Details of Shopicho
 - [**Authentication**](#authentication)

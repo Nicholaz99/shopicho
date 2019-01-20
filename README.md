@@ -1,3 +1,5 @@
+<img src="logo.png">
+
 Shopicho
 &middot;
 [![GitLab license](https://img.shields.io/github/license/Day8/re-frame.svg)](LICENSE)

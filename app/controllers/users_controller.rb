@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.create!(user_params)
+    Cart.create!(user_id: @user.id)
     json_response({ 'message': 'Your account is successfully registered', 'user': @user }, :created)
   end
 

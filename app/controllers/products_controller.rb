@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
 
   # PUT /products/:id
   def update
-    @product.update(product_params)
+    @product.update!(product_params)
     head :no_content
   end
 

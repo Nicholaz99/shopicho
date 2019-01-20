@@ -17,18 +17,38 @@ class CartItemsController < ApplicationController
 
   # POST /carts/:cart_id/cart_items
   def create
-    @cart.cart_items.create!(cart_item_params)
-    json_response({ 'message': 'Cart Item is added to the cart' }, :created)
+    item = CartItem.find_by(cart_id: params[:cart_id], product_id: params[:product_id])
+    # if such item exists on your cart
+    if item
+      product = Product.find(params[:product_id])
+      if item.quantity + params[:quantity].to_i <= product.inventory_count
+        curr_total = @cart.total_amount
+        old_item_total = item.quantity * item.price
+        item.increment!(:quantity, params[:quantity].to_i)
+        new_item_total = item.quantity * item.price
+        @cart.update_attribute(:total_amount, curr_total - old_item_total + new_item_total)
+        json_response({ 'message': 'Cart Item is updated' })
+      end
+    else
+      @cart.cart_items.create!(cart_item_params)
+      @cart.increment!(:total_amount, params[:quantity].to_i * Product.find(params[:product_id]).price)
+      json_response({ 'message': 'Cart Item is added to the cart' }, :created)
+    end
   end
 
   # PUT /carts/:cart_id/cart_items/:id
   def update
-    @cart_item.update(update_cart_item_params)
+    curr_total = @cart.total_amount
+    old_item_total = @cart_item.quantity * @cart_item.price
+    @cart_item.update!(update_cart_item_params)
+    new_item_total = @cart_item.quantity * @cart_item.price
+    @cart.update_attribute(:total_amount, curr_total - old_item_total + new_item_total)
     json_response({ 'message': 'Cart Item is updated' })
   end
 
   # DELETE /carts/:cart_id/cart_items/:id
   def destroy
+    @cart.decrement!(:total_amount, @cart_item.quantity * @cart_item.price)
     @cart_item.destroy
     json_response({ 'message': 'Cart Item is deleted' })
   end
@@ -37,6 +57,7 @@ class CartItemsController < ApplicationController
 
   def cart_item_params
     price = Product.find(params[:product_id]).price
+    params.merge(:price => price)
     params.require(:cart_item).permit(:cart_id, :product_id, :quantity).merge(:price => price)
   end
 

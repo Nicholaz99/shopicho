@@ -9,10 +9,10 @@ Shopicho
 - [Main Features](#main-features)
 - [Requirements](#requirements)
 - [Run Shopicho](#run-shopicho)
-- [List of Endpoints](#list-of-endpoints)
 - [Details of Shopicho](#details-of-shopicho)
 - [Authors](#authors)
 - [Words From Authors](#words-from-authors)
+- [List of Endpoints](#list-of-endpoints)
 
 ## Introduction
 This is the implementation of the barebones of an online marketplace. A server-side web API that can help you build your own online shop. Shopicho was built using **Ruby on Rails** framework.
@@ -39,10 +39,6 @@ Follow these steps to run Shopicho on your local:
 4. Execute `rails db:seed` on your shell to seed the database.
 5. Execute `rails s` on your shell to run the API server on your local.
 6. Read the endpoint documentation on the [List of Endpoints](#list-of-endpoints) in order to use Shopicho properly.
-
-## List of Endpoints
-These are the available endpoints on Shopicho with the explanations.
-
 
 ## Details of Shopicho
 - [**Authentication**](#authentication)
@@ -135,7 +131,7 @@ These are the CartItem attributes :
 I include price column in the CartItem model. My reason why I include it is there is a chance that we want to change the price of products from time to time in the Products model, but we do not want those changes to affect the price already paid for previous orders. By adding the Price column, we will not face a problem when there is a change of price in some products, especially when we want to create an audit trail reports. The relationship between CartItem model and Cart model is **many-to-one**.
 
 ### Controller
-These are the summary of what did the controller do to server the request.
+Every model controllers jobs are to make sure that users could not violate constraints of every features those are stated at [List of Endpoints](#list-of-endpoints) in order to make sure that Shopicho works properly. Controllers also controls the Shopicho authentication flows by running some checker / middleware on every request that Shopicho received.
 
 ### Unit Testing
 In order to run the unit testing, execute `bundle exec rspec` in your shell. I create 159 examples to make sure that my endpoints were working well. You can check all the unit testing in `spec` folder. I've tried to make it as humanly as possible so that everyone could understand all test cases with their intended behaviors.
@@ -147,3 +143,29 @@ Nicholas Rianto Putra - nicholasrputra@gmail.com - https://github.com/nicholaz99
 Thanks to Shopify Careers for your amazing [Summer 2019 Developer Intern Challenge](https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/preview). Your challenge gives me the opportunity to improve my software engineering skills. I learn a lot by doing your amazing challenge, just like your Director of Engineering words.
 > *"Shopify gives me the opportunity to continually grow and discover my strengths, technically and people-wise."*
 > *, IBK Ajila — Director of Engineering Shopify*
+
+## List of Endpoints
+These are the available endpoints on Shopicho with the explanations.
+
+Available to every user
+
+Name | URL | Method | Params | Response | Constraint
+--- | --- | --- | --- | --- | ---
+Register New User | /users | POST | <li>name: string</li><li>email: string</li><li>balance: decimal</li><li>password: string</li><li>password_confirmation: string</li> | <li>Code: 201 CREATED</li><li>Content: { 'message': 'Your account is successfully registered' }</li>**Error Response**<li>Code: 422 UNPROCESSABLE ENTRY</li><li>Content: { 'message': 'Validation failed: ...' }</li> | <li>User is not allowed to register as an admin</li>
+Login | /login | POST | <li>email: string</li><li>password: string</li> | **Success Response**<li>Code: 200 OK</li><li>Content: { 'auth_token': 'xxxxx' }</li>**Error Response**<li>Code: 404 UNAUTHORIZED</li><li>Content: { 'message': 'Login failed' }</li> | 
+View User Detail | /users/:id | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: user detail</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find user' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to view other users details</li><li>Admin is allowed to view any users details</li>
+Update User Detail | /users/:id | PUT | <li>name: string</li><li>email: string</li><li>balance: decimal</li><li>password: string</li><li>password_confirmation: string</li> | **Success Response**<li>Code: 200 OK</li><li>Content: user detail</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find user' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to update other users details</li><li>Admin is allowed to update any users details</li><li>You don't need to update all params, just choose the details you want to change</li>
+Delete User | /users/:id | DELETE | | **Success Response**<li>Code: 200 OK</li><li>Content: { "message": "Your account is deleted" }</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find user' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to delete other users</li><li>Admin is allowed to delete any users</li>
+View Available Products | /products | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: list products</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Products with inventory_count = 0 is not showed</li>
+View Product Detail | /products/:id | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: product detail</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find Product' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Products with inventory_count = 0 is not showed</li>
+View User Carts | /carts | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: list carts</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li>
+View User Cart Detail | /carts/:id | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: cart detail</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find Cart' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to view other users carts</li><li>Admin is allowed to view any users carts</li>
+View User Cart Items | /carts/:id/cart_items | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: list of cart items</li>**Error Response**<li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find Cart' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to view other users cart items</li><li>Admin is allowed to view any users cart items</li>
+Add Items to Cart | /carts/:id/cart_items | POST | <li>product_id: integer</li><li>quantity: integer</li> | **Success Response**<li>Code: 201 CREATED</li><li>Content: { "message": "Cart Item is added to the cart" }</li><li>Code: 200 OK</li><li>Content: { "message": "Cart Item is updated" }</li>**Error Response**<li>Code: 405 METHOD NOT ALLOWED</li><li>Content: { 'message': 'xxx' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to add item to other users carts</li><li>Admin is allowed to add items to any users carts</li><li>Quantity params must be less or equal than product inventory_count</li><li>if CartItem belongs to user cart with same product_id exists, rather than add a new cart item, this method will update the quantity of that cartItem</li><li>Cart total_amount get updated</li>
+Update Cart Items | /carts/:id/cart_items/:item_id | PUT | <li>quantity: integer</li> | **Success Response**<li>Code: 200 OK</li><li>Content: { "message": "Cart Item is updated" }</li>**Error Response**<li>Code: 405 METHOD NOT ALLOWED</li><li>Content: { 'message': 'xxx' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to update other users cart items</li><li>Admin is allowed to update any users cart items</li><li>Quantity params must be less or equal than product inventory_count</li><li>Cart total_amount get updated</li>
+Remove Cart Items | /carts/:id/cart_items/:item_id | DELETE | | **Success Response**<li>Code: 200 OK</li><li>Content: { "message": "Cart Item is added to the cart" }</li>**Error Response**<li>Code: 405 METHOD NOT ALLOWED</li><li>Content: { 'message': 'xxx' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to remove other users cart items</li><li>Admin is allowed to remove any users cart items</li><li>Cart total_amount get updated</li>
+Checkout Cart | /carts/:id | PUT | | **Success Response**<li>Code: 200 OK</li><li>Content: { "message": "Thank you for purchasing our product" }</li>**Error Response**<li>Code: 405 METHOD NOT ALLOWED</li><li>Content: { 'message': 'xxx' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li><li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Normal Users are not allowed to checkout other users carts</li><li>Admin is allowed to checkout any users carts</li><li>User balance must be greater or equal than cart total_amount</li><li>Controller will make sure that every cart item is not out of stock</li>
+View All Users (Admin Only) | /users | GET | | **Success Response**<li>Code: 200 OK</li><li>Content: users</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li> | <li>Authorization: JWT</li><li>Only Admin can view all existing users</li>
+Add New Product (Admin Only) | /products | POST | <li>title: string</li><li>price: decimal</li><li>inventory_count: integer</li> | **Success Response**<li>Code: 201 CREATED</li><li>Content: product detail</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li><li>Code: 422 UNPROCESSABLE ENTRY</li><li>Content: { 'message': 'Validation failed: ...' }</li> | <li>Authorization: JWT</li><li>Only Admin can add new product</li>
+Update Product Detail (Admin Only) | /products/:id | PUT | <li>title: string</li><li>price: decimal</li><li>inventory_count: integer</li> | **Success Response**<li>Code: 200 OK</li><li>Content: { 'message': 'Product is updated' }</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li> | <li>Authorization: JWT</li><li>Only Admin can update new product</li><li>You don't need to update all params, just choose the details you want to change</li>
+Update Product Detail (Admin Only) | /products/:id | DELETE | | **Success Response**<li>Code: 200 OK</li><li>Content: { 'message': 'Product is deleted' }</li>**Error Response**<li>Code: 401 UNAUTHORIZED</li><li>Content: { 'message': 'Not Authorized' }</li><li>Code: 404 NOT FOUND</li><li>Content: { 'message': 'Couldn't find xxx' }</li> | <li>Authorization: JWT</li><li>Only Admin can delete product</li>

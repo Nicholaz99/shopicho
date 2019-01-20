@@ -1,4 +1,4 @@
-<img src="logo.png">
+<img src="shopicho-logo.jpg">
 
 Shopicho
 &middot;

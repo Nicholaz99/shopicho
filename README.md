@@ -145,7 +145,7 @@ I use the rspec to help me create some unit tests for Shopicho. In order to run 
 Nicholas Rianto Putra - nicholasrputra@gmail.com - https://github.com/nicholaz99
 
 ## Words from Author
-Thanks to Shopify Careers for your amazing [Summer 2019 Developer Intern Challenge](https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/preview). Your challenge gives me the opportunity to improve my software engineering skills. I learn a lot by doing your amazing challenge, just like your Director of Engineering words.
+Thanks to Shopify Careers for your amazing [Summer 2019 Developer Intern Challenge](https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/preview). Your challenge gives me the opportunity to improve my software engineering skills. I learn a lot by doing your amazing challenge, just like the words of your Director of Engineering.
 > *"Shopify gives me the opportunity to continually grow and discover my strengths, technically and people-wise."*
 > *, IBK Ajila — Director of Engineering Shopify*
 

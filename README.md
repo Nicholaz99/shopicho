@@ -151,8 +151,10 @@ Thanks to Shopify Careers for your amazing [Summer 2019 Developer Intern Challen
 
 ## List of Endpoints
 These are the available endpoints on Shopicho with the explanations.
-
-Available to every user
+**Notes:**
+* **You will get your id when you register on Shopicho for the first time**
+* **You need to login first in order to get the JWT and use the JWT on your Authorization headers.**
+* **I have already create an admin account with credentials: email: `admin@shopify.com`, password: `admin99`**
 
 Name | URL | Method | Params | Constraint
 --- | --- | --- | --- | ---
